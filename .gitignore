@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+chatbox.db
+chatbox.db-wal
+chatbox.db-shm
+.secret
+.env
+cookies.txt
