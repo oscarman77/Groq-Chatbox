@@ -3,6 +3,7 @@
 import os
 import secrets
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -46,5 +47,8 @@ LLM_API_KEY = os.getenv("LLM_API_KEY", "").strip()
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1").rstrip("/")
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "60"))
+
+# Shown in the UI so it is obvious which endpoint is answering.
+LLM_PROVIDER = urlparse(LLM_BASE_URL).hostname or "custom"
 
 MOCK_MODE = not LLM_API_KEY

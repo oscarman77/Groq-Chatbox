@@ -60,7 +60,12 @@ def load_conversation(db: sqlite3.Connection, conversation_id: int, user_id: int
 
 @app.get("/api/health")
 def health() -> dict:
-    return {"ok": True, "mock_mode": config.MOCK_MODE, "model": config.LLM_MODEL}
+    return {
+        "ok": True,
+        "mock_mode": config.MOCK_MODE,
+        "model": config.LLM_MODEL,
+        "provider": config.LLM_PROVIDER,
+    }
 
 
 # --- auth --------------------------------------------------------------------

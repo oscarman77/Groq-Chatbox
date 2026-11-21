@@ -257,7 +257,17 @@ async function enterApp() {
   $("#who").textContent = state.user.email;
 
   const health = await api("/api/health").catch(() => null);
-  if (health?.mock_mode) $("#mode-badge").classList.remove("hidden");
+  const badge = $("#mode-badge");
+  if (health) {
+    if (health.mock_mode) {
+      badge.textContent = "mock mode";
+      badge.className = "badge mock";
+    } else {
+      badge.textContent = `${health.provider} · ${health.model}`;
+      badge.className = "badge live";
+    }
+    badge.classList.remove("hidden");
+  }
 
   await loadConversations();
   renderConversations();
