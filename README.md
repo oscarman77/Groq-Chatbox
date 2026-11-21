@@ -12,11 +12,13 @@ A deliberately small full-stack project: **REST API + SQL + LLM chat + authentic
 
 ```powershell
 cd C:\Users\MightyMatcha\Desktop\OpenChamber\Projects\chatbox
-.\run.ps1
+.\run.cmd
 ```
 
-`run.ps1` creates `.venv`, installs dependencies the first time, then serves the app.
-(The manual equivalent is in the next section.)
+`run.cmd` creates `.venv`, installs dependencies the first time, starts the server, and
+opens the browser once it is ready. It goes through `powershell -ExecutionPolicy Bypass`,
+so it also works when `.\run.ps1` is blocked by the machine's execution policy
+(`running scripts is disabled on this system`).
 
 Open http://127.0.0.1:8000, create an account, and chat.
 The API docs are at http://127.0.0.1:8000/docs.
@@ -25,7 +27,7 @@ A demo account already exists in the local database: `demo@local.dev` / `passwor
 Delete `chatbox.db` for a clean start — it is recreated on the next launch.
 
 <details>
-<summary>Manual setup without run.ps1</summary>
+<summary>Manual setup without run.cmd</summary>
 
 ```powershell
 python -m venv .venv
@@ -34,6 +36,9 @@ pip install -r requirements.txt
 $env:PYTHONPATH = "."
 uvicorn app.main:app --reload
 ```
+
+If activation is blocked by the execution policy, run
+`powershell -ExecutionPolicy Bypass -File .\run.ps1` instead.
 
 </details>
 
@@ -53,7 +58,8 @@ Groq, Together, OpenRouter, a local llama.cpp server, and so on.
 ## Layout
 
 ```
-run.ps1       one-command start (venv + deps + server)
+run.cmd       double-click / terminal start (bypasses execution policy)
+run.ps1       the actual start script (venv + deps + server + browser)
 app/
   main.py     REST routes and the chat flow
   db.py       SQLite schema and connection helpers
