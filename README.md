@@ -4,7 +4,7 @@ A deliberately small full-stack project: **REST API + SQL + LLM chat + authentic
 
 - **REST API** — FastAPI, auto docs at `/docs`
 - **SQL** — SQLite (`chatbox.db`), tables for users, conversations, messages
-- **LLM chat** — any OpenAI-compatible endpoint; runs in mock mode with no key
+- **LLM chat** — any OpenAI-compatible endpoint; runs in mock mode with no key (in my case I used Groq)
 - **Auth** — email + password (PBKDF2), JWT in an httpOnly cookie
 - **Frontend** — plain HTML/CSS/JS, no build step
 
@@ -22,6 +22,7 @@ so it also works when `.\run.ps1` is blocked by the machine's execution policy
 
 Open http://127.0.0.1:8000, create an account, and chat.
 The API docs are at http://127.0.0.1:8000/docs.
+Go to https://console.groq.com/home to retrieve your own API key.
 
 A demo account already exists in the local database: `demo@local.dev` / `password123`.
 Delete `chatbox.db` for a clean start — it is recreated on the next launch.
